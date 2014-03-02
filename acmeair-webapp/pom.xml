@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.acmeair</groupId>
-            <artifactId>acmeair-services-wxs</artifactId>
+            <artifactId>acmeair-services-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -81,12 +81,6 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.ibm.websphere.objectgrid</groupId>
-            <artifactId>objectgrid</artifactId>
-            <version>${objectgrid.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -29,11 +29,9 @@
 
   <modules>
     <module>acmeair-common</module>
-    <module>acmeair-loader</module>
     <module>acmeair-services</module>
-    <module>acmeair-services-wxs</module>
+    <module>acmeair-services-jpa</module>
     <module>acmeair-webapp</module>
-    <module>acmeair-driver</module>
   </modules>
 
   <dependencies>

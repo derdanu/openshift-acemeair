@@ -15,17 +15,21 @@
 *******************************************************************************/
 package com.acmeair.entities;
 
-import java.util.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "flight")
 public class Flight implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private FlightPK _id;
-	
+	@EmbeddedId
 	private FlightPK pkey;
 	private Date scheduledDepartureTime;
 	private Date scheduledArrivalTime;
@@ -46,7 +50,6 @@ public class Flight implements Serializable{
 			int numFirstClassSeats, int numEconomyClassSeats,
 			String airplaneTypeId) {
 		this.pkey = new FlightPK(flightSegmentId,id);
-		this._id = this.pkey;
 		this.scheduledDepartureTime = scheduledDepartureTime;
 		this.scheduledArrivalTime = scheduledArrivalTime;
 		this.firstClassBaseCost = firstClassBaseCost;
