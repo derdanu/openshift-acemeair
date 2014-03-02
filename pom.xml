@@ -32,6 +32,7 @@
     <module>acmeair-services</module>
     <module>acmeair-services-jpa</module>
     <module>acmeair-webapp</module>
+    <module>acmeair-wlp</module>
   </modules>
 
   <dependencies>
