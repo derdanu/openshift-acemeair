@@ -42,7 +42,7 @@ import com.acmeair.service.FlightService;
 @Component
 public class LoaderREST {
 	
-	private static final int MAX_FLIGHTS_PER_SEGMENT = 30;
+	private static final int MAX_FLIGHTS_PER_SEGMENT = 10;
 	
 	private CustomerService customerService = ServiceLocator.getService(CustomerService.class);
 	private FlightService flightService = ServiceLocator.getService(FlightService.class);
