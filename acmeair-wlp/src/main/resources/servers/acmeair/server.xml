@@ -16,7 +16,7 @@
       <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
-    <webApplication  name="acme" location="acmeair.war"/>
+    <webApplication  name="acmeair" location="acmeair.war"/>
 
     <jdbcDriver id="DerbyEmbedded" libraryRef="DerbyLib" />
     <library id="DerbyLib" filesetRef="DerbyFileset" />
