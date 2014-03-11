@@ -56,11 +56,6 @@ public class Customer implements Serializable{
 		this.phoneNumber = phoneNumber;
 		this.phoneNumberType = phoneNumberType;
 	}
-
-	
-	public String getID() {
-		return id;
-	}
 	
 	public String getUsername() {
 		return id;

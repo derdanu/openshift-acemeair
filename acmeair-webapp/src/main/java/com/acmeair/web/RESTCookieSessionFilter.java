@@ -55,10 +55,10 @@ public class RESTCookieSessionFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
 		
-		String path = request.getContextPath() + request.getServletPath() + request.getPathInfo();
-
+		String path = request.getServletPath() + request.getPathInfo();
+		
 		// could do .startsWith for now, but plan to move LOGOUT to its own REST interface eventually
-		if (path.endsWith(LOGIN_PATH) || path.endsWith(LOGOUT_PATH) || path.endsWith("/rest/api/loader/load")) {
+		if (path.endsWith(LOGIN_PATH) || path.endsWith(LOGOUT_PATH) || path.startsWith("/rest/api/loader/")) {
 			// if logging in, let the request flow
 			chain.doFilter(req, resp);
 			return;

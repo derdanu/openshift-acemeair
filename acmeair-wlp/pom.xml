@@ -16,16 +16,17 @@
 **************************************************************************** -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>com.acmeair</groupId>
         <artifactId>acmeair</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    
     <artifactId>acmeair-wlp</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>acmeair-wlp</name>
-
+    
     <dependencies>
         <dependency>
             <groupId>com.acmeair</groupId>
@@ -34,12 +35,25 @@
             <type>war</type>
         </dependency>
         <dependency>
+            <groupId>com.acmeair</groupId>
+            <artifactId>acmeair-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.10.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
         </dependency>
     </dependencies>
-
+    
     <pluginRepositories>
         <!-- Configure Sonatype OSS Maven snapshots repository -->
         <pluginRepository>
@@ -54,7 +68,7 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
-
+    
     <build>
         <plugins>
             <plugin>
@@ -111,9 +125,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <!-- Prevent surefire from executing integration tests as unit tests -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
+    
     <profiles>
         <profile>
             <id>run-its</id>
@@ -136,19 +158,17 @@
                                     <goal>start-server</goal>
                                 </goals>
                                 <configuration>
-                                    <background>true</background>
                                     <verifyTimeout>40</verifyTimeout>
+                                    <applications>acmeair</applications>
                                 </configuration>
                             </execution>
-                            <!--
-                        <execution>
-                          <id>stop-liberty-server</id>
-                          <phase>post-integration-test</phase>
-                          <goals>
-                            <goal>stop-server</goal>
-                          </goals>
-                        </execution>
--->
+                            <execution>
+                                <id>stop-liberty-server</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop-server</goal>
+                                </goals>
+                            </execution>
                         </executions>
                         <configuration>
                             <serverHome>${wlpInstallDir}</serverHome>
@@ -156,9 +176,19 @@
                             <serverName>acmeair</serverName>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <!-- Pass contextPath and httpPort to the integration tests -->
+                            <systemPropertyVariables>
+                                <contextPath>/${rootArtifactId}-web-${project.version}</contextPath>
+                                <httpPort>${httpPort}</httpPort>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-
 </project>

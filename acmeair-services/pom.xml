@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!-- ***************************************************************************
 * Copyright (c) 2013 IBM Corp.
 *
@@ -13,25 +14,23 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **************************************************************************** -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.acmeair</groupId>
-    <artifactId>acmeair</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>acmeair-services</artifactId>
-  <name>acmeair-services</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.acmeair</groupId>
-			<artifactId>acmeair-common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.acmeair</groupId>
+        <artifactId>acmeair</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>acmeair-services</artifactId>
+    <name>acmeair-services</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.acmeair</groupId>
+            <artifactId>acmeair-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

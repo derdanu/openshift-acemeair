@@ -10,13 +10,12 @@
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint"
-                  host="localhost"
-                  httpPort="9080"
-                  httpsPort="9443" >
+                  host="*"
+                  httpPort="9081" >
       <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
-    <webApplication  name="acmeair" location="acmeair.war"/>
+    <application  name="acmeair" type="war" location="acmeair.war"/>
 
     <jdbcDriver id="DerbyEmbedded" libraryRef="DerbyLib" />
     <library id="DerbyLib" filesetRef="DerbyFileset" />

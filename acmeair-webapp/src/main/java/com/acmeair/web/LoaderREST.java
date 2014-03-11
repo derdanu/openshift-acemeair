@@ -64,12 +64,28 @@ public class LoaderREST {
 		return "Sample data loaded.";		
 	}
 
-	public void loadCustomers(long numCustomers) {
-		CustomerAddress address = new CustomerAddress("123 Main St.", null, "Anytown", "NC", "USA", "27617");
-		for (long ii = 0; ii < numCustomers; ii++) {
-			customerService.createCustomer("uid"+ii+"@email.com", "password", Customer.MemberShipStatus.GOLD, 1000000, 1000, "919-123-4567", PhoneType.BUSINESS, address);
-		}
-	}
+    @GET
+    @Path("/loadCustomers")
+    @Produces("text/plain")
+    public String loadCustomers() {
+        try {
+            loadCustomers(10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Customer data loaded.";
+    }
+
+    public void loadCustomers(long numCustomers) {
+        CustomerAddress address = new CustomerAddress("123 Main St.", null,  "Anytown", "NC", "USA", "27617");
+        for (long ii = 0; ii < numCustomers; ii++) {
+            String id = "uid" + ii + "@email.com";
+            Customer customer = customerService.getCustomerByUsername(id);
+            if (customer == null) {
+                customerService.createCustomer(id, "password", Customer.MemberShipStatus.GOLD, 1000000, 1000, "919-123-4567", PhoneType.BUSINESS, address);
+            }
+        }
+    }
 	
 	public void loadFlights() throws Exception {
 		InputStream csvInputStream = getClass().getResourceAsStream("/mileage.csv");
