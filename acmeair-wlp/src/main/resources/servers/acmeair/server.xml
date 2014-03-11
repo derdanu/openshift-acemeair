@@ -8,10 +8,10 @@
         <feature>jdbc-4.0</feature>
         <feature>jpa-2.0</feature>
     </featureManager>
-
+    
     <httpEndpoint id="defaultHttpEndpoint"
                   host="*"
-                  httpPort="9081" >
+                  httpPort="${httpPort}" >
       <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
