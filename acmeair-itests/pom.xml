@@ -23,9 +23,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     
-    <artifactId>acmeair-wlp</artifactId>
+    <artifactId>acmeair-itests</artifactId>
     <packaging>jar</packaging>
-    <name>acmeair-wlp</name>
+    <name>acmeair-itests</name>
     
     <dependencies>
         <dependency>

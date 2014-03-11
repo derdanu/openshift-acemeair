@@ -33,7 +33,7 @@
         <module>acmeair-services</module>
         <module>acmeair-services-jpa</module>
         <module>acmeair-webapp</module>
-        <module>acmeair-wlp</module>
+        <module>acmeair-itests</module>
     </modules>
     
     <!-- Define dependency version information -->
