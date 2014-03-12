@@ -55,8 +55,9 @@ public class FlightServiceImpl implements FlightService {
 		List<Flight> flights = new ArrayList<Flight>();
 		
 		Query q = em.createQuery("SELECT obj FROM FlightSegment obj where obj.destPort=?1 and obj.originPort=?2");
-		q.setParameter(1, fromAirport);
-		q.setParameter(2, toAirport);
+		q.setParameter(1, toAirport);
+		q.setParameter(2, fromAirport);
+		
 		List<FlightSegment> results = (List<FlightSegment>) q.getResultList();		
 		for (FlightSegment seg : results) {
 			Query qq = em.createQuery("SELECT obj FROM Flight obj where  obj.scheduledDepartureTime=?1 and obj.pkey.flightSegmentId=?2");
@@ -76,8 +77,8 @@ public class FlightServiceImpl implements FlightService {
 	@Override
 	public List<Flight> getFlightByAirports(String fromAirport, String toAirport) {
 		Query q = em.createQuery("SELECT obj FROM FlightSegment obj where obj.destPort=?1 and obj.originPort=?2");
-		q.setParameter(1, fromAirport);
-		q.setParameter(2, toAirport);
+		q.setParameter(1, toAirport);
+		q.setParameter(2, fromAirport);
 		
 		List<Flight> flights = new ArrayList<Flight>();
 		
@@ -96,15 +97,20 @@ public class FlightServiceImpl implements FlightService {
 		return flights;
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
-	@Override
-	public void storeAirportMapping(AirportCodeMapping mapping) {
-		try {
-			em.persist(mapping);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void storeAirportMapping(AirportCodeMapping mapping) {
+        Query q = em.createQuery("SELECT obj FROM AirportCodeMapping obj where obj.id=?1 and obj.airportName=?2");
+        q.setParameter(1, mapping.getAirportCode());
+        q.setParameter(2, mapping.getAirportName());
+        if (q.getResultList().isEmpty()) {
+            try {
+                em.persist(mapping);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
@@ -128,7 +134,7 @@ public class FlightServiceImpl implements FlightService {
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
-	public void storeFlightSegment(FlightSegment flightSeg) {
+	public void storeFlightSegment(FlightSegment flightSeg) {		
 		try {
 			em.persist(flightSeg);
 		} catch (Exception e) {

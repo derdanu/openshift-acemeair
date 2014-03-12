@@ -21,10 +21,8 @@ import java.util.Date;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "flight")
 public class Flight implements Serializable{
 
 	private static final long serialVersionUID = 1L;
