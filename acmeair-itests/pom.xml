@@ -98,11 +98,10 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/usr</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/resources</directory>
-                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -125,7 +124,7 @@
                                     <groupId>org.apache.derby</groupId>
                                     <artifactId>derby</artifactId>
                                     <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/shared/resources/derby</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/usr/shared/resources/derby</outputDirectory>
                                     <destFileName>derby.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
@@ -133,7 +132,7 @@
                                     <artifactId>acmeair-webapp</artifactId>
                                     <type>war</type>
                                     <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/servers/acmeair/apps</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/usr/servers/acmeair/apps</outputDirectory>
                                     <destFileName>acmeair.war</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -162,7 +161,6 @@
             </activation>
             <build>
                 <plugins>
-                    <!-- Reserve http port for server -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
@@ -181,12 +179,11 @@
                             </execution>
                         </executions>
                     </plugin>                               
-                    <!-- Start/stop Liberty server -->
+
                     <plugin>
                         <groupId>net.wasdev.wlp.maven.plugins</groupId>
                         <artifactId>liberty-maven-plugin</artifactId>
                         <executions>
-                            <!-- Start server before integration tests -->
                             <execution>
                                 <id>start-liberty-server</id>
                                 <phase>pre-integration-test</phase>
@@ -194,15 +191,12 @@
                                     <goal>start-server</goal>
                                 </goals>
                                 <configuration>
-                                    <!--  Wait for acmeair applications to be started -->
                                     <applications>acmeair</applications>
-                                    <!-- Pass reserved http port to the liberty server -->
                                     <bootstrapProperties>   
                                         <httpPort>${wlp.http.port}</httpPort>
                                     </bootstrapProperties>
                                 </configuration>
                             </execution>
-                            <!-- Stop server after integration tests -->
                             <execution>
                                 <id>stop-liberty-server</id>
                                 <phase>post-integration-test</phase>
@@ -212,20 +206,16 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <!-- Set Liberty installation directory -->
                             <serverHome>${wlpInstallDir}</serverHome>
-                            <!-- Set Liberty user directory -->
-                            <userDirectory>${project.build.directory}</userDirectory>
-                            <!-- Set server name to start/stop -->
+                            <userDirectory>${project.build.directory}/usr</userDirectory>
                             <serverName>acmeair</serverName>
                         </configuration>
                     </plugin>
-                    <!-- Runs integration tests -->
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <!-- Pass reserved http port to the integration tests -->
                             <systemPropertyVariables>                              
                                 <httpPort>${wlp.http.port}</httpPort>
                             </systemPropertyVariables>
