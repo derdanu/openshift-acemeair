@@ -42,8 +42,6 @@ import com.acmeair.service.FlightService;
 @Component
 public class LoaderREST {
 
-    private static final int MAX_FLIGHTS_PER_SEGMENT = 10;
-
     private CustomerService customerService = ServiceLocator.getService(CustomerService.class);
     private FlightService flightService = ServiceLocator.getService(FlightService.class);
 
@@ -57,7 +55,7 @@ public class LoaderREST {
             e.printStackTrace();
         }
         try {
-            loadFlights();
+            loadFlights(30);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,15 +63,20 @@ public class LoaderREST {
     }
 
     @GET
-    @Path("/loadCustomers")
+    @Path("/loadSmall")
     @Produces("text/plain")
     public String loadCustomers() {
         try {
-            loadCustomers(10);
+            loadCustomers(5);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Customer data loaded.";
+        try {
+            loadFlights(5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Sample data loaded.";
     }
 
     public void loadCustomers(long numCustomers) {
@@ -89,7 +92,7 @@ public class LoaderREST {
         System.out.println("Done loading customer data.");
     }
 
-    public void loadFlights() throws Exception {
+    public void loadFlights(int segments) throws Exception {
         System.out.println("Loading flight data...");
         InputStream csvInputStream = getClass().getResourceAsStream("/mileage.csv");
         LineNumberReader lnr = new LineNumberReader(new InputStreamReader(csvInputStream));
@@ -149,7 +152,7 @@ public class LoaderREST {
                 FlightSegment flightSeg = new FlightSegment(flightId, airportCode, toAirport, miles);
                 flightService.storeFlightSegment(flightSeg);
                 Date now = new Date();
-                for (int daysFromNow = 0; daysFromNow < MAX_FLIGHTS_PER_SEGMENT; daysFromNow++) {
+                for (int daysFromNow = 0; daysFromNow < segments; daysFromNow++) {
                     Calendar c = Calendar.getInstance();
                     c.setTime(now);
                     c.set(Calendar.HOUR_OF_DAY, 0);
