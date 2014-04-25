@@ -18,7 +18,7 @@
         <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
     </dataSource>
 
-    <dataSource id="jdbc/acmeairdatasourceonjta" jndiName="jdbc/acmeairdatasourceonjta" transactional="false" jdbcDriverRef="PostgreSQL">
+    <dataSource id="jdbc/acmeairdatasourcenonjta" jndiName="jdbc/acmeairdatasourcenonjta" transactional="false" jdbcDriverRef="PostgreSQL">
         <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
     </dataSource>
 
