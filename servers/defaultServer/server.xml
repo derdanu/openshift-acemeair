@@ -1,0 +1,31 @@
+<server description="new server">
+
+    <featureManager>
+        <feature>jsp-2.2</feature>
+        <feature>jaxrs-1.1</feature>
+        <feature>jndi-1.0</feature>
+        <feature>jdbc-4.0</feature>
+        <feature>jpa-2.0</feature>
+    </featureManager>
+
+    <httpEndpoint id="defaultHttpEndpoint" host="${host}" httpPort="${http.port}" />
+
+    <application id="myapp" name="myapp" type="war" location="ROOT.war" context-root="/" />
+
+    <logging logDirectory="../../log" />
+
+    <dataSource id="jdbc/acmeairdatasource" jndiName="jdbc/acmeairdatasource" jdbcDriverRef="PostgreSQL">
+        <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
+    </dataSource>
+
+    <dataSource id="jdbc/acmeairdatasourceonjta" jndiName="jdbc/acmeairdatasourceonjta" transactional="false" jdbcDriverRef="PostgreSQL">
+        <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
+    </dataSource>
+
+    <jdbcDriver id="PostgreSQL" libraryRef="PostgreSQLLib" javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource" />
+
+    <library id="PostgreSQLLib">
+        <fileset dir="../../../app-root/runtime/build-dependencies/.m2/repository/org/postgresql/postgresql/9.2-1003-jdbc4" includes="postgresql-9.2-1003-jdbc4.jar" />
+    </library>
+
+</server>
