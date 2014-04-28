@@ -4,5 +4,9 @@ This project contains both the application source and server config as expected 
 
 To use a different type of relational database, update pom.xml and server.xml.
 
+To load data into the database, go to http://<app name>-dev.openshift.local/rest/api/loader.
+
+Try New York to Paris for a flight with a lot of options to pick from.
+
 
 [Liberty OpenShift cartridge]: https://github.rtp.raleigh.ibm.com/mtpeters-us/liberty-cartridge
