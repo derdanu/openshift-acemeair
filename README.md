@@ -1,14 +1,11 @@
-# Acme Air Sample
+# OpenShift Acme Air Sample
 
-This application shows an implementation of a fictitious airline called "Acme Air".
+This project contains both the application source and server config as expected 
+by the [Liberty OpenShift cartridge][]. When creating an application, specify 
+this repository as the initial URL and then add a PostgreSQL cartridge to the 
+application.
 
-## Repository Contents
+To use a different type of relational database, update pom.xml and server.xml.
 
-Source:
 
-- **acmeair-common**: The Java entities used throughout the application
-- **acmeair-services**:  The Java data services interface definitions
-- **acmeair-service-jpa**:  JPA-based data service implementations
-- **acmeair-webapp**:  The Web 2.0 application and associated Java REST services
-- **acmeair-itests**:  Integraion tests for the application
-
+[Liberty OpenShift cartridge]: https://github.rtp.raleigh.ibm.com/mtpeters-us/liberty-cartridge
