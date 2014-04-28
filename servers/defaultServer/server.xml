@@ -15,11 +15,11 @@
     <logging logDirectory="../../log" />
 
     <dataSource id="jdbc/acmeairdatasource" jndiName="jdbc/acmeairdatasource" jdbcDriverRef="PostgreSQL">
-        <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
+        <properties databaseName="${env.PGDATABASE}" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
     </dataSource>
 
     <dataSource id="jdbc/acmeairdatasourcenonjta" jndiName="jdbc/acmeairdatasourcenonjta" transactional="false" jdbcDriverRef="PostgreSQL">
-        <properties databaseName="acmeairdatabase" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
+        <properties databaseName="${env.PGDATABASE}" serverName="${env.OPENSHIFT_POSTGRESQL_DB_HOST}" password="${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}" portNumber="${env.OPENSHIFT_POSTGRESQL_DB_PORT}" user="${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
     </dataSource>
 
     <jdbcDriver id="PostgreSQL" libraryRef="PostgreSQLLib" javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource" />

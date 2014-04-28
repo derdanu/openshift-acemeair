@@ -88,11 +88,6 @@
 	    <version>9.2-1003-jdbc4</version>
 	</dependency>
     </dependencies>
-
-    <profiles>
-    <profile>
-    <id>openshift</id>
-    
     <build>
         <!-- Define and configure plugins -->
         <pluginManagement>
@@ -156,8 +151,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    </profile>
-    </profiles>
-
 </project>
