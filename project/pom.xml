@@ -83,9 +83,9 @@
             <scope>test</scope>
         </dependency>
 	<dependency>
-	    <groupId>postgresql</groupId>
+	    <groupId>org.postgresql</groupId>
 	    <artifactId>postgresql</artifactId>
-	    <version>8.4-702.jdbc4</version>
+	    <version>9.3-1101-jdbc4</version>
 	</dependency>
     </dependencies>
     <build>
