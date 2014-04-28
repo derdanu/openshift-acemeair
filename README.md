@@ -1,9 +1,6 @@
 # OpenShift Acme Air Sample
 
-This project contains both the application source and server config as expected 
-by the [Liberty OpenShift cartridge][]. When creating an application, specify 
-this repository as the initial URL and then add a PostgreSQL cartridge to the 
-application.
+This project contains both the application source and server config as expected by the [Liberty OpenShift cartridge][]. When creating an application, specify this repository as the initial URL and then add a PostgreSQL cartridge to the application.
 
 To use a different type of relational database, update pom.xml and server.xml.
 
