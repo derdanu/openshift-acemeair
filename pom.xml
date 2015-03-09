@@ -113,7 +113,7 @@
                             <!-- Do not include META-INF/maven to avoid long file problems on windows -->
                             <addMavenDescriptor>false</addMavenDescriptor>
                         </archive>
-			<outputDirectory>apps</outputDirectory>
+			<outputDirectory>deployments</outputDirectory>
 			<warName>ROOT</warName>
                     </configuration>
                 </plugin>
