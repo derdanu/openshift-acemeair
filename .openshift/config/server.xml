@@ -25,7 +25,7 @@
     <jdbcDriver id="PostgreSQL" libraryRef="PostgreSQLLib" javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource" />
 
     <library id="PostgreSQLLib">
-        <fileset dir="~/app-root/repo/lib" includes="postgresql-*.jar" />
+        <fileset dir="{env.OPENSHIFT_REPO_DIR}lib" includes="postgresql-*.jar" />
     </library>
 
 </server>
